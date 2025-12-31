@@ -1,0 +1,136 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: radial-gradient(
+  ellipse at center,
+  #2a001f 0%,
+  #12000d 45%,
+  #000000 100%
+);
+
+  font-family: 'Poppins', sans-serif;
+  user-select: none;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+#galaxy, #rotatingContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+}
+
+#rotatingContainer {
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform-style: preserve-3d;
+  transform-origin: center center;
+  transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg);
+}
+
+.text-particle, .image-particle {
+  position: absolute;
+  user-select: none;
+  pointer-events: none;
+}
+.text-particle {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  padding: 5px 8px;
+  border: 2px solid rgba(255, 105, 180, 0.8);
+  border-radius: 10px;
+  white-space: nowrap;
+
+  animation: gradient-move 5s linear infinite;
+  background-size: 300% 300%;
+
+  font-family: "Denk One", sans-serif;
+  box-shadow:
+  0 0 10px rgba(255,105,180,0.5),
+  inset 0 0 8px rgba(255,255,255,0.6);
+
+}
+
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+.image-particle {
+  max-width: 100px;
+  border-radius: 15px;
+  filter: drop-shadow(0 0 4px #ff9d9d);
+}
+
+@media (min-width: 1024px) {
+  .image-particle {
+    width: 100pc;
+    border-radius: 5px;
+  }
+}
+
+#fireworks {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#intro {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #120018, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#intro-center {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#countdown {
+  font-family: "Bangers", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 120px;
+  color: #ff69b4;
+  min-height: 160px;  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Happy New Year */
+#newyear {
+  font-family: "Bangers", system-ui;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 80px;
+  color: #ff69b4;
+  position: absolute;     
+  top: 50%;
+  transform: translateY(-50%) scale(0.6);
+  opacity: 0;
+  text-align: center;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); }
+}
