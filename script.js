@@ -9,6 +9,8 @@ const galaxy = document.getElementById("galaxy");
 
 /* ================== DATA ================== */
 const messages = [
+
+  
   "I Love You",
   "Happy New Year 2026",
   "Love You 3000",
@@ -23,6 +25,30 @@ const imageURLs = [];
 for (let i = 1; i <= 14; i++) {
   imageURLs.push(`img/Anh (${i}).jpg`);
 }
+
+const loadedImages = [];
+
+function preloadImages(callback) {
+  let loaded = 0;
+
+  imageURLs.forEach((src, i) => {
+    const img = new Image();
+    img.src = src;
+
+    img.onload = () => {
+      loadedImages[i] = src;
+      loaded++;
+      if (loaded === imageURLs.length) callback();
+    };
+
+    img.onerror = () => {
+      console.warn("Không load được ảnh:", src);
+      loaded++;
+      if (loaded === imageURLs.length) callback();
+    };
+  });
+}
+
 
 const icons = ["❤️", "🍀", "🌸"];
 
@@ -69,7 +95,10 @@ function createParticle(type = "text") {
     el.style.fontSize = (isIcon ? 20 : 18) + Math.random() * 10 + "px";
   } else {
     el.className = "image-particle";
-    el.src = imageURLs[Math.floor(Math.random() * imageURLs.length)];
+    if (loadedImages.length === 0) return;
+
+el.src = loadedImages[Math.floor(Math.random() * loadedImages.length)];
+
   }
 
   el.style.opacity = 0;
@@ -343,11 +372,15 @@ window.addEventListener("DOMContentLoaded", () => {
       countdownEl.style.display = "none";
       setTimeout(() => {
         intro.remove();
-        startFireworks();
-        startStars();
-        loopParticles();
-        initRotation();
+        preloadImages(() => {
+  startFireworks();
+  startStars();
+  loopParticles();
+  initRotation();
+});
+
       }, 1500);
     }
   }, 1000);
 });
+
