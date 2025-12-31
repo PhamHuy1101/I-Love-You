@@ -13,7 +13,7 @@ const messages = [
 ];
 const imageURLs = [];
 for (let i = 1; i <= 14; i++) {
-  imageURLs.push(`style/img/Anh (${i}).jpg`);
+  imageURLs.push(`img/Anh (${i}).jpg`);
 }
 const icons = ["❤️","🍀","🌸"];
 const maxParticles = 120;
@@ -400,3 +400,4 @@ let musicStarted = false;
     }
   }, 1000);
 });
+
